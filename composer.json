@@ -51,7 +51,9 @@
     "drupal/twig_tweak": "^2.0",
     "drupal/ultimate_cron": "^2.0@alpha",
     "acromedia/orange_ecom_starter": "dev-8.x-1.x",
-    "acromedia/orange_framework": "dev-8.x-1.x",
+    "acromedia/orange_framework": "dev-8.x-1.x"
+  },
+  "require-dev": {
     "acromedia/acro_live_css": "dev-8.x-1.x"
   },
   "minimum-stability": "dev",
