@@ -5,6 +5,7 @@ dependencies:
     - commerce_product.commerce_product_type.standard
     - core.entity_view_mode.commerce_product.cart
     - field.field.commerce_product.standard.body
+    - field.field.commerce_product.standard.field_image_hover
     - field.field.commerce_product.standard.field_images
     - field.field.commerce_product.standard.field_meta_tags
     - field.field.commerce_product.standard.field_paragraph_reference
@@ -14,8 +15,6 @@ dependencies:
     - field.field.commerce_product.standard.field_terms_reference
     - field.field.commerce_product.standard.field_terms_reference_2
     - field.field.commerce_product.standard.field_text_long
-    - field.field.commerce_product.standard.stores
-    - field.field.commerce_product.standard.variations
   module:
     - commerce_product
 _core:
@@ -43,6 +42,7 @@ content:
 hidden:
   body: true
   created: true
+  field_image_hover: true
   field_images: true
   field_meta_tags: true
   field_paragraph_reference: true
@@ -53,5 +53,6 @@ hidden:
   field_terms_reference_2: true
   field_text_long: true
   langcode: true
+  search_api_excerpt: true
   stores: true
   uid: true

@@ -33,12 +33,13 @@ third_party_settings:
         open: false
         required_fields: true
       label: 'Strap Details'
+      region: content
     group_strap_content:
       children:
         - field_paragraphs_reference
         - field_paragraphs_reference_2
       parent_name: group_strap_details
-      weight: 7
+      weight: 4
       format_type: details
       format_settings:
         id: ''
@@ -46,6 +47,7 @@ third_party_settings:
         open: false
         required_fields: true
       label: 'Strap Content'
+      region: content
 _core:
 id: paragraph.strap.default
 targetEntityType: paragraph
@@ -53,7 +55,9 @@ bundle: strap
 mode: default
 content:
   field_bg_color:
-    weight: 4
+    type: color_field_widget_spectrum
+    weight: 1
+    region: content
     settings:
       show_input: '1'
       palette: ''
@@ -62,10 +66,10 @@ content:
       show_palette: '0'
       show_palette_only: '0'
     third_party_settings: {  }
-    type: color_field_widget_spectrum
-    region: content
   field_color:
-    weight: 3
+    type: color_field_widget_spectrum
+    weight: 0
+    region: content
     settings:
       show_input: '1'
       palette: ''
@@ -74,10 +78,8 @@ content:
       show_palette: '0'
       show_palette_only: '0'
     third_party_settings: {  }
-    type: color_field_widget_spectrum
-    region: content
   field_image:
-    weight: 5
+    weight: 2
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -85,7 +87,7 @@ content:
     type: image_image
     region: content
   field_opacity:
-    weight: 6
+    weight: 3
     settings:
       placeholder: ''
     third_party_settings: {  }

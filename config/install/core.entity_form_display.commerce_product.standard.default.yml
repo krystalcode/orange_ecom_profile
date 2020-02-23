@@ -4,6 +4,7 @@ dependencies:
   config:
     - commerce_product.commerce_product_type.standard
     - field.field.commerce_product.standard.body
+    - field.field.commerce_product.standard.field_image_hover
     - field.field.commerce_product.standard.field_images
     - field.field.commerce_product.standard.field_meta_tags
     - field.field.commerce_product.standard.field_paragraph_reference
@@ -13,8 +14,6 @@ dependencies:
     - field.field.commerce_product.standard.field_terms_reference
     - field.field.commerce_product.standard.field_terms_reference_2
     - field.field.commerce_product.standard.field_text_long
-    - field.field.commerce_product.standard.stores
-    - field.field.commerce_product.standard.variations
     - image.style.thumbnail
   module:
     - comment
@@ -32,7 +31,7 @@ third_party_settings:
       children:
         - variations
       parent_name: ''
-      weight: 12
+      weight: 13
       format_type: details
       format_settings:
         id: ''
@@ -40,21 +39,10 @@ third_party_settings:
         open: true
         required_fields: true
       label: 'Product Variations'
+      region: content
     group_tabs:
       children:
         - field_paragraphs_reference
-      parent_name: ''
-      weight: 13
-      format_type: details
-      format_settings:
-        id: ''
-        classes: ''
-        open: false
-        required_fields: true
-      label: Tabs
-    group_featured_products:
-      children:
-        - field_paragraph_reference
       parent_name: ''
       weight: 14
       format_type: details
@@ -63,10 +51,11 @@ third_party_settings:
         classes: ''
         open: false
         required_fields: true
-      label: 'Featured Products'
-    group_product_reviews:
+      label: Tabs
+      region: content
+    group_featured_products:
       children:
-        - field_product_reviews
+        - field_paragraph_reference
       parent_name: ''
       weight: 15
       format_type: details
@@ -75,7 +64,21 @@ third_party_settings:
         classes: ''
         open: false
         required_fields: true
+      label: 'Featured Products'
+      region: content
+    group_product_reviews:
+      children:
+        - field_product_reviews
+      parent_name: ''
+      weight: 16
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        open: false
+        required_fields: true
       label: 'Product Reviews'
+      region: content
 _core:
 id: commerce_product.standard.default
 targetEntityType: commerce_product
@@ -84,11 +87,12 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 11
+    weight: 12
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
+      show_summary: false
     third_party_settings: {  }
     region: content
   created:
@@ -97,6 +101,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_image_hover:
+    weight: 10
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
   field_images:
     weight: 9
     settings:
@@ -106,7 +118,7 @@ content:
     type: image_image
     region: content
   field_meta_tags:
-    weight: 17
+    weight: 18
     settings: {  }
     third_party_settings: {  }
     type: metatag_firehose
@@ -137,7 +149,7 @@ content:
     region: content
   field_paragraphs_reference_2:
     type: entity_reference_paragraphs
-    weight: 16
+    weight: 17
     settings:
       title: Component
       title_plural: Components
@@ -166,12 +178,14 @@ content:
     type: options_select
     region: content
   field_text_long:
-    weight: 10
+    weight: 11
     settings:
-      rows: 5
+      rows: 9
+      summary_rows: 3
       placeholder: ''
+      show_summary: false
     third_party_settings: {  }
-    type: text_textarea
+    type: text_textarea_with_summary
     region: content
   langcode:
     type: language_select
@@ -219,6 +233,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
   variations:
     type: inline_entity_form_complex

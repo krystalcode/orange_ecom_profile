@@ -1,24 +1,80 @@
 langcode: en
 status: true
 dependencies:
-  config:
-    - field.storage.commerce_product.variations
-    - search_api.server.solr
   module:
+    - search_api_solr
     - commerce_product
     - search_api
-    - search_api_solr
+  config:
+    0: field.storage.commerce_product.field_terms_reference
+    1: field.storage.commerce_product.field_terms_reference_2
+    3: search_api.server.solr
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    advanced:
+      index_prefix: ''
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
 _core:
 id: products
 name: Products
-description: ''
+description: 'Store catalog.'
 read_only: false
 field_settings:
-  title:
-    label: Title
+  created:
+    label: Created
     datasource_id: 'entity:commerce_product'
-    property_path: title
-    type: text
+    property_path: created
+    type: date
+    dependencies:
+      module:
+        - commerce_product
+  field_terms_reference:
+    label: Categories
+    datasource_id: 'entity:commerce_product'
+    property_path: field_terms_reference
+    type: string
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_terms_reference
+  field_terms_reference_2:
+    label: Brands
+    datasource_id: 'entity:commerce_product'
+    property_path: field_terms_reference_2
+    type: string
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_terms_reference_2
+  number:
+    label: 'Variations » Product variation » Price » Number'
+    datasource_id: 'entity:commerce_product'
+    property_path: 'variations:entity:price:number'
+    type: decimal
+    dependencies:
+      config:
+        - field.storage.commerce_product.variations
+      module:
+        - commerce_product
+        - commerce_product
   sku:
     label: 'Variations » Product variation » SKU'
     datasource_id: 'entity:commerce_product'
@@ -30,26 +86,23 @@ field_settings:
         - field.storage.commerce_product.variations
       module:
         - commerce_product
-  number:
-    label: 'Variations » Product variation » Price » Number'
-    datasource_id: 'entity:commerce_product'
-    property_path: 'variations:entity:price:number'
-    type: decimal
-    dependencies:
-      config:
-        - field.storage.commerce_product.variations
-      module:
         - commerce_product
   status:
     label: Published
     datasource_id: 'entity:commerce_product'
     property_path: status
     type: boolean
-  created:
-    label: Created
+    dependencies:
+      module:
+        - commerce_product
+  title:
+    label: Title
     datasource_id: 'entity:commerce_product'
-    property_path: created
-    type: date
+    property_path: title
+    type: text
+    dependencies:
+      module:
+        - commerce_product
 datasource_settings:
   'entity:commerce_product':
     bundles:
@@ -61,6 +114,11 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  hierarchy:
+    fields:
+      field_terms_reference: taxonomy_term-parent
+    weights:
+      preprocess_index: -45
   highlight:
     highlight: always
     highlight_partial: false
@@ -74,19 +132,22 @@ processor_settings:
   ignorecase:
     all_fields: false
     fields:
-      - title
       - sku
+      - title
     weights:
       preprocess_index: -20
       preprocess_query: -20
   rendered_item: {  }
+  solr_date_range:
+    weights:
+      preprocess_index: 0
   stemmer:
     all_fields: false
     fields:
       - title
     exceptions:
-      texan: texa
       mexican: mexic
+      texan: texa
     weights:
       preprocess_index: 0
       preprocess_query: 0
@@ -97,7 +158,6 @@ processor_settings:
     weights:
       preprocess_index: -20
       preprocess_query: -20
-  solr_date_range: {  }
 tracker_settings:
   default:
     indexing_order: fifo

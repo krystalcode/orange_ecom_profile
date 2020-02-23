@@ -4,7 +4,7 @@ dependencies:
   config:
     - field.field.paragraph.webform_content.field_alignment
     - field.field.paragraph.webform_content.field_paragraphs_reference
-    - field.field.paragraph.webform_content.field_text_long_formatted
+    - field.field.paragraph.webform_content.field_text_long
     - field.field.paragraph.webform_content.field_webform_reference
     - paragraphs.paragraphs_type.webform_content
   module:
@@ -27,10 +27,11 @@ third_party_settings:
         open: false
         required_fields: true
       label: 'Component Details'
+      region: content
     group_webform:
       children:
         - field_alignment
-        - field_text_long_formatted
+        - field_text_long
         - field_webform_reference
       parent_name: group_component_details
       weight: 4
@@ -41,6 +42,7 @@ third_party_settings:
         open: false
         required_fields: true
       label: Webform
+      region: content
     group_content:
       children:
         - field_paragraphs_reference
@@ -53,6 +55,7 @@ third_party_settings:
         open: false
         required_fields: true
       label: Content
+      region: content
 _core:
 id: paragraph.webform_content.default
 targetEntityType: paragraph
@@ -77,13 +80,15 @@ content:
     third_party_settings: {  }
     type: entity_reference_paragraphs
     region: content
-  field_text_long_formatted:
+  field_text_long:
     weight: 2
     settings:
-      rows: 3
+      rows: 9
+      summary_rows: 3
       placeholder: ''
+      show_summary: false
     third_party_settings: {  }
-    type: text_textarea
+    type: text_textarea_with_summary
     region: content
   field_webform_reference:
     weight: 3

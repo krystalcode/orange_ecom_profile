@@ -21,6 +21,8 @@ third_party_settings:
         open: false
         required_fields: true
       label: 'Content Strap Details'
+      region: content
+_core:
 id: paragraph.content_strap.default
 targetEntityType: paragraph
 bundle: content_strap

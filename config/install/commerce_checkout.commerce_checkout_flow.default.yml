@@ -30,3 +30,4 @@ configuration:
       view: commerce_checkout_order_summary
       step: _sidebar
       weight: 5
+  display_checkout_progress_breadcrumb_links: false
