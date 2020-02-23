@@ -117,6 +117,7 @@ dependencies:
   - views_infinite_scroll
   - webform
   - webform_ui
+  - ultimate_cron
 
 themes:
   - seven
